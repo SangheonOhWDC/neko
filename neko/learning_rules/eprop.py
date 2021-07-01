@@ -185,7 +185,9 @@ class Eprop(BaseLearningRule):
         if self.mode == 'adaptive':
             gradients.append(w_ho_grad)
         self.optimizer.apply_gradients(parameters=self.trainable_parameters, gradients=gradients)
-
+        #Lr Schedulere - SOh
+        self.optimizer.change_parameter('learning_rate', self.optimizer.learning_rate * 0.3)
+        
         if self.mode == 'symmetric':
             n.variable_assign(self.broadcast, self.model.w_ho)
         if self.mode == 'adaptive':
